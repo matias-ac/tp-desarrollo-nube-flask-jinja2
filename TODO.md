@@ -10,3 +10,5 @@
 
 - guardar dependencias:
   - `pip freeze > requirements.txt`
+
+- https://flask.palletsprojects.com/en/stable/quickstart/
