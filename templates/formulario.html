@@ -4,6 +4,15 @@
 <h2>Formulario de registro</h2>
 <form method="POST">
   Nombre: <input type="text" name="nombre"><br>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
   Email: <input type="email" name="email"><br>
   <input type="submit" value="Enviar">
 </form>
