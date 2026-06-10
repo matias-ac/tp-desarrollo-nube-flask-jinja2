@@ -2,18 +2,19 @@
 
 {% block content %}
 <h2>Formulario de registro</h2>
+
 <form method="POST">
-  Nombre: <input type="text" name="nombre"><br>
-  {% with messages = get_flashed_messages() %}
+  
+  <label for="nombre">Nombre:</label>
+  <input type="text" name="nombre"><br>
+  {% with messages = get_flashed_messages(category_filter=["nombre_error"]) %}
     {% if messages %}
-      <ul class="flashes">
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-      </ul>
+      <span>{{ messages[0] }}</span><br>
     {% endif %}
   {% endwith %}
+
   Email: <input type="email" name="email"><br>
   <input type="submit" value="Enviar">
+
 </form>
 {% endblock %}

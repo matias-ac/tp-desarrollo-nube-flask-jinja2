@@ -1,4 +1,4 @@
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request
 
 app = Flask(__name__)
 app.secret_key = "super_secret"
@@ -9,9 +9,12 @@ def formulario():
     if request.method == "POST":
         nombre = request.form["nombre"]
         email = request.form["email"]
+        print(request)
+        print(f"nombre: {nombre}")
+        print(f"email: {email}")
 
         if len(nombre) < 1:
-            flash("El campo 'nombre' no puede estar vacío")
+            flash("El campo 'nombre' no puede estar vacío", "nombre_error")
             return redirect("/")
 
         return render_template("resultado.html", nombre=nombre, email=email)
