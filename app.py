@@ -1,11 +1,9 @@
-import re
+from flask import Flask, flash, render_template, request
 
-from flask import Flask, flash, redirect, render_template, request
+from utils import es_email_correcto
 
 app = Flask(__name__)
 app.secret_key = "super_secret"
-
-email_pattern = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -21,7 +19,7 @@ def formulario():
             flash("El campo 'nombre' no puede estar vacío", "nombre_error")
             return render_template("formulario.html", nombre=nombre, email=email)
 
-        if not re.fullmatch(email_pattern, email):
+        if not es_email_correcto(email):
             flash("Email con formato inválido", "email_error")
             return render_template("formulario.html", nombre=nombre, email=email)
 
