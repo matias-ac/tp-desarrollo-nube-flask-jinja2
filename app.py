@@ -1,9 +1,11 @@
+import os
+
 from flask import Flask, flash, render_template, request
 
 from utils import es_email_correcto
 
 app = Flask(__name__)
-app.secret_key = "super_secret"
+app.secret_key = os.environ.get("SECRET_KEY")
 
 
 @app.route("/", methods=["GET", "POST"])
