@@ -1,5 +1,6 @@
 from validaciones_form import (
     eliminar_espacios_duplicados,
+    es_edad_correcta,
     es_email_correcto,
     es_nombre_correcto,
 )
@@ -28,3 +29,17 @@ def test_retorna_true_si_nombre_recibido_solo_contiene_caracteres_alfabeticos():
 def test_elimina_espacios_duplicados():
     assert eliminar_espacios_duplicados("  Juan       Carlos    ") == "Juan Carlos"
     assert eliminar_espacios_duplicados("   123    456    ") == "123 456"
+
+
+def test_retorna_false_si_edad_es_menor_que_1():
+    assert es_edad_correcta(-1) is False
+    assert es_edad_correcta(0) is False
+
+
+def test_retorna_false_si_recibe_string():
+    assert es_edad_correcta("uno") is False
+    assert es_edad_correcta("1 2 3") is False
+
+
+def test_retorna_true_si_edad_es_mayor_o_igual_que_uno():
+    assert es_edad_correcta(1) is True

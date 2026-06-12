@@ -20,3 +20,14 @@ def es_nombre_correcto(nombre: str):
     if not nombre_ingresado.replace(" ", "").isalpha():
         return False
     return True
+
+
+def es_edad_correcta(edad):
+    edad_ingresada: int
+    try:
+        edad_ingresada = int(edad)
+        if edad_ingresada < 1:
+            return False
+    except ValueError:
+        return False
+    return True

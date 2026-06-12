@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, flash, render_template, request
 
-from validaciones_form import es_email_correcto, es_nombre_correcto
+from validaciones_form import es_edad_correcta, es_email_correcto, es_nombre_correcto
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
@@ -33,11 +33,11 @@ def formulario():
             )
             return renderizar_formulario_con_valores(nombre, email, edad)
 
-        if len(edad.strip()) < 1:
-            flash("Debe ingresar su edad", "edad_error")
+        if not es_edad_correcta(edad):
+            flash("Debe ingresar su edad correctamente (número entero)", "edad_error")
             return renderizar_formulario_con_valores(nombre, email, edad)
 
-        return render_template("resultado.html", nombre=nombre, email=email)
+        return render_template("resultado.html", nombre=nombre, email=email, edad=edad)
     return render_template("formulario.html")
 
 
