@@ -14,7 +14,7 @@ def formulario():
         nombre = request.form["nombre"]
         email = request.form["email"]
 
-        if len(nombre) < 1:
+        if len(nombre.strip()) < 1:
             flash("El campo 'nombre' no puede estar vacío", "nombre_error")
             return render_template("formulario.html", nombre=nombre, email=email)
 
