@@ -13,9 +13,6 @@ def formulario():
     if request.method == "POST":
         nombre = request.form["nombre"]
         email = request.form["email"]
-        print(request)
-        print(f"nombre: {nombre}")
-        print(f"email: {email}")
 
         if len(nombre) < 1:
             flash("El campo 'nombre' no puede estar vacío", "nombre_error")
