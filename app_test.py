@@ -64,3 +64,18 @@ def test_formulario_contiene_elemento_select():
     select = soup.find("select", attrs={"name": "carrera"})
 
     assert select is not None
+
+
+def test_formulario_contiene_opciones_de_carrera():
+    tester = app.test_client()
+    response = tester.get("/")
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    select = soup.find("select", attrs={"name": "carrera"})
+    assert select is not None
+    
+    opciones = select.find_all("option")
+
+    assert opciones[1].text == "Análisis de Sistemas"
+    assert opciones[2].text == "Desarrollo de Software"
+    assert opciones[3].text == "Ciencia de Datos"
