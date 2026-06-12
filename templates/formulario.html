@@ -2,9 +2,26 @@
 
 {% block content %}
 <h2>Formulario de registro</h2>
+
 <form method="POST">
-  Nombre: <input type="text" name="nombre"><br>
-  Email: <input type="email" name="email"><br>
-  <input type="submit" value="Enviar">
+  
+  <label for="nombre">Nombre:</label>
+  <input type="text" name="nombre" value="{{ nombre or "" }}"><br>
+  {% with messages = get_flashed_messages(category_filter=["nombre_error"]) %}
+    {% if messages %}
+      <small class="error">{{ messages[0] }}</small><br>
+    {% endif %}
+  {% endwith %}
+
+  <label for="email">Email:</label>
+  <input type="email" name="email" value="{{ email or "" }}"><br>
+  {% with messages = get_flashed_messages(category_filter=["email_error"]) %}
+    {% if messages %}
+      <small class="error">{{ messages[0] }}</small><br>
+    {% endif %}
+  {% endwith %}
+
+  <button type="submit">Enviar</button>
+
 </form>
 {% endblock %}

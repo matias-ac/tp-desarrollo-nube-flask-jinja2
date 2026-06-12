@@ -12,3 +12,8 @@
   - `pip freeze > requirements.txt`
 
 - https://flask.palletsprojects.com/en/stable/quickstart/
+
+- levantar servidor en el puerto 5050:
+  - `flask --app app run --port 5050`
+
+- https://flask.palletsprojects.com/en/stable/testing/
