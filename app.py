@@ -8,8 +8,14 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
 
 
-def renderizar_formulario_con_valores(nombre, email, edad):
-    return render_template("formulario.html", nombre=nombre, email=email, edad=edad)
+def renderizar_formulario_con_valores(nombre, email, edad, comentarios):
+    return render_template(
+        "formulario.html",
+        nombre=nombre,
+        email=email,
+        edad=edad,
+        comentarios=comentarios,
+    )
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -18,24 +24,29 @@ def formulario():
         nombre = request.form["nombre"]
         email = request.form["email"]
         edad = request.form["edad"]
+        comentarios = request.form["comentarios"]
 
         if not es_nombre_correcto(nombre):
             flash(
                 "Debe ingresar un nombre con caracteres válidos (alfabéticos)",
                 "nombre_error",
             )
-            return renderizar_formulario_con_valores(nombre, email, edad)
+            return renderizar_formulario_con_valores(nombre, email, edad, comentarios)
 
         if not es_email_correcto(email):
             flash(
                 "Debe ingresar un email con formato válido (ej.: email@email.com)",
                 "email_error",
             )
-            return renderizar_formulario_con_valores(nombre, email, edad)
+            return renderizar_formulario_con_valores(nombre, email, edad, comentarios)
 
         if not es_edad_correcta(edad):
             flash("Debe ingresar su edad correctamente (número entero)", "edad_error")
-            return renderizar_formulario_con_valores(nombre, email, edad)
+            return renderizar_formulario_con_valores(nombre, email, edad, comentarios)
+
+        if len(str(comentarios)) > 500:
+            flash("Máximo 500 caracteres", "comentarios_error")
+            return renderizar_formulario_con_valores(nombre, email, edad, comentarios)
 
         return render_template("resultado.html", nombre=nombre, email=email, edad=edad)
     return render_template("formulario.html")
