@@ -1,10 +1,13 @@
-import unittest
+from app import app
 
 
-class SmokeTest(unittest.TestCase):
-    def test_true_es_true(self):
-        self.assertEqual(True, True)
+def test_renderiza_el_formulario_con_status_200():
+    tester = app.test_client()
+    response = tester.get("/")
+    assert response.status_code == 200
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_renderiza_el_formulario_con_titulo():
+    tester = app.test_client()
+    response = tester.get("/")
+    assert "Formulario de registro" in response.text
