@@ -9,7 +9,7 @@
   <input type="text" name="nombre" value="{{ nombre or "" }}"><br>
   {% with messages = get_flashed_messages(category_filter=["nombre_error"]) %}
     {% if messages %}
-      <span>{{ messages[0] }}</span><br>
+      <small class="error">{{ messages[0] }}</small><br>
     {% endif %}
   {% endwith %}
 
@@ -17,7 +17,7 @@
   <input type="email" name="email" value="{{ email or "" }}"><br>
   {% with messages = get_flashed_messages(category_filter=["email_error"]) %}
     {% if messages %}
-      <span>{{ messages[0] }}</span><br>
+      <small class="error">{{ messages[0] }}</small><br>
     {% endif %}
   {% endwith %}
 
