@@ -1,3 +1,5 @@
+from bs4 import BeautifulSoup
+
 from app import app
 
 
@@ -11,3 +13,69 @@ def test_renderiza_el_formulario_con_titulo():
     tester = app.test_client()
     response = tester.get("/")
     assert "Formulario de registro" in response.text
+
+
+def test_formulario_contiene_input_nombre():
+    tester = app.test_client()
+    response = tester.get("/")
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    input_nombre = soup.find("input", attrs={"name": "nombre"})
+
+    assert input_nombre is not None
+
+
+def test_formulario_contiene_input_email():
+    tester = app.test_client()
+    response = tester.get("/")
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    input_email = soup.find("input", attrs={"name": "email"})
+
+    assert input_email is not None
+
+
+def test_formulario_contiene_input_edad_numerico():
+    tester = app.test_client()
+    response = tester.get("/")
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    input_edad = soup.find("input", attrs={"name": "edad"})
+
+    assert input_edad is not None
+    assert input_edad["type"] == "number"
+
+
+def test_formulario_contiene_text_area():
+    tester = app.test_client()
+    response = tester.get("/")
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    text_area_comentarios = soup.find("textarea", attrs={"name": "comentarios"})
+
+    assert text_area_comentarios is not None
+
+
+def test_formulario_contiene_elemento_select():
+    tester = app.test_client()
+    response = tester.get("/")
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    select = soup.find("select", attrs={"name": "carrera"})
+
+    assert select is not None
+
+
+def test_formulario_contiene_opciones_de_carrera():
+    tester = app.test_client()
+    response = tester.get("/")
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    select = soup.find("select", attrs={"name": "carrera"})
+    assert select is not None
+    
+    opciones = select.find_all("option")
+
+    assert opciones[1].text == "Análisis de Sistemas"
+    assert opciones[2].text == "Desarrollo de Software"
+    assert opciones[3].text == "Ciencia de Datos"
