@@ -2,10 +2,14 @@ import os
 
 from flask import Flask, flash, render_template, request
 
-from utils import es_email_correcto
+from validaciones_form import es_email_correcto, es_nombre_correcto
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
+
+
+def renderizar_formulario_con_valores(nombre, email, edad):
+    return render_template("formulario.html", nombre=nombre, email=email, edad=edad)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -13,14 +17,25 @@ def formulario():
     if request.method == "POST":
         nombre = request.form["nombre"]
         email = request.form["email"]
+        edad = request.form["edad"]
 
-        if len(nombre.strip()) < 1:
-            flash("El campo 'nombre' no puede estar vacío", "nombre_error")
-            return render_template("formulario.html", nombre=nombre, email=email)
+        if not es_nombre_correcto(nombre):
+            flash(
+                "Debe ingresar un nombre con caracteres válidos (alfabéticos)",
+                "nombre_error",
+            )
+            return renderizar_formulario_con_valores(nombre, email, edad)
 
         if not es_email_correcto(email):
-            flash("Email con formato inválido", "email_error")
-            return render_template("formulario.html", nombre=nombre, email=email)
+            flash(
+                "Debe ingresar un email con formato válido (ej.: email@email.com)",
+                "email_error",
+            )
+            return renderizar_formulario_con_valores(nombre, email, edad)
+
+        if len(edad.strip()) < 1:
+            flash("Debe ingresar su edad", "edad_error")
+            return renderizar_formulario_con_valores(nombre, email, edad)
 
         return render_template("resultado.html", nombre=nombre, email=email)
     return render_template("formulario.html")

@@ -33,3 +33,14 @@ def test_formulario_contiene_input_email():
     input_email = soup.find("input", attrs={"name": "email"})
 
     assert input_email is not None
+
+
+def test_formulario_contiene_input_edad_numerico():
+    tester = app.test_client()
+    response = tester.get("/")
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    input_edad = soup.find("input", attrs={"name": "edad"})
+
+    assert input_edad is not None
+    assert input_edad["type"] == "number"

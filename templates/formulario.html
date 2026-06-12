@@ -21,6 +21,14 @@
     {% endif %}
   {% endwith %}
 
+  <label for="edad">Edad:</label>
+  <input type="number" name="edad" value="{{ edad or "" }}"><br>
+  {% with messages = get_flashed_messages(category_filter=["edad_error"]) %}
+    {% if messages %}
+      <small class="error">{{ messages[0] }}</small>
+    {% endif %}
+  {% endwith %}
+
   <button type="submit">Enviar</button>
 
 </form>
