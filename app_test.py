@@ -44,3 +44,13 @@ def test_formulario_contiene_input_edad_numerico():
 
     assert input_edad is not None
     assert input_edad["type"] == "number"
+
+
+def test_formulario_contiene_text_area():
+    tester = app.test_client()
+    response = tester.get("/")
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    text_area_comentarios = soup.find("textarea", attrs={"name": "comentarios"})
+
+    assert text_area_comentarios is not None

@@ -29,6 +29,15 @@
     {% endif %}
   {% endwith %}
 
+  <label for="comentarios">Comentarios:</label>
+  <textarea name="comentarios" rows="5" cols="33" maxlenght="500">{{ comentarios or "" }}</textarea>
+  <small>Máximo 500 caracteres</small>
+  {% with messages = get_flashed_messages(category_filter=["comentarios_error"]) %}
+    {% if messages %}
+      <small class="error">{{ messages[0] }}</small>
+    {% endif %}
+  {% endwith %}
+
   <button type="submit">Enviar</button>
 
 </form>
