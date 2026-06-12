@@ -54,3 +54,13 @@ def test_formulario_contiene_text_area():
     text_area_comentarios = soup.find("textarea", attrs={"name": "comentarios"})
 
     assert text_area_comentarios is not None
+
+
+def test_formulario_contiene_elemento_select():
+    tester = app.test_client()
+    response = tester.get("/")
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    select = soup.find("select", attrs={"name": "carrera"})
+
+    assert select is not None
