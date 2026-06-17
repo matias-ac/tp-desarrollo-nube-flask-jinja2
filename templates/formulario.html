@@ -20,6 +20,11 @@
       <small class="error">{{ messages[0] }}</small><br>
     {% endif %}
   {% endwith %}
+  {% with messages = get_flashed_messages(category_filter=["email_duplicado"]) %}
+    {% if messages %}
+      <small class="error">{{ messages[0] }}</small><br>
+    {% endif %}
+  {% endwith %}
 
   <label for="edad">Edad:</label>
   <input type="number" name="edad" value="{{ edad or "" }}"><br>

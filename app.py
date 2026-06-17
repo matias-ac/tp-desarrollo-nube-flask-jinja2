@@ -72,13 +72,21 @@ def formulario():
                 nombre, email, edad, carrera, comentarios
             )
 
-        usuarios.append({
-            "nombre": nombre,
-            "email": email,
-            "edad": edad,
-            "carrera": CARRERAS[carrera],
-            "comentarios": comentarios,
-        })
+        if any(u["email"] == email for u in usuarios):
+            flash("Este email ya está registrado. Usá otro.", "email_duplicado")
+            return renderizar_formulario_con_valores(
+                nombre, email, edad, carrera, comentarios
+            )
+
+        usuarios.append(
+            {
+                "nombre": nombre,
+                "email": email,
+                "edad": edad,
+                "carrera": CARRERAS[carrera],
+                "comentarios": comentarios,
+            }
+        )
 
         return render_template(
             "resultado.html",
