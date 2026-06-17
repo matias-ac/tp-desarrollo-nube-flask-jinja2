@@ -6,8 +6,11 @@
   </head>
   <body>
     <nav>
-      <a href="{{ url_for('formulario') }}">Registrarse</a>
-      <a href="{{ url_for('listado') }}">Usuarios</a>
+      <span class="nav-brand">IFTS-18</span>
+      <span class="nav-links">
+        <a href="{{ url_for('formulario') }}">Registrarse</a>
+        <a href="{{ url_for('listado') }}">Usuarios</a>
+      </span>
     </nav>
     {% block content %}{% endblock %}
   </body>

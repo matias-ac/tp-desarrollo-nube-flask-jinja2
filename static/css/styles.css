@@ -78,21 +78,33 @@ button:hover {
 
 nav {
   background-color: #007bff;
-  padding: 10px 15px;
+  padding: 15px;
   margin-bottom: 20px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 5px;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding: 8px 14px;
   border-radius: 4px;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin-right: 20px;
-  font-family: sans-serif;
-  font-weight: bold;
-}
-
-nav a:hover {
-  text-decoration: underline;
+.nav-links a:hover {
+  background-color: #0056b3;
 }
 
 /* -- Estilos de la tabla -- */
