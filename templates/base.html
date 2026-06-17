@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
   </head>
   <body>
+    <nav>
+      <a href="{{ url_for('formulario') }}">Registrarse</a>
+      <a href="{{ url_for('listado') }}">Usuarios</a>
+    </nav>
     {% block content %}{% endblock %}
   </body>
 </html>
