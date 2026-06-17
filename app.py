@@ -76,7 +76,7 @@ def formulario():
             email=email,
             edad=edad,
             carrera=CARRERAS[carrera],
-            comenarios=comentarios,
+            comentarios=comentarios,
         )
     return render_template("formulario.html")
 
