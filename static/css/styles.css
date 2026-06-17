@@ -1,3 +1,5 @@
+/* -- Estilos del Formulario -- */
+
 .error {
   color: red;
   display: block;
@@ -8,6 +10,10 @@
 form {
   max-width: 450px;
   margin: 20px 0;
+}
+
+h2, label, small {
+  font-family: sans-serif;
 }
 
 label, input, select, textarea, button, small {
@@ -44,4 +50,16 @@ button {
 
 button:hover {
   background-color: #0056b3
+}
+
+/* -- Estilos del Resultado -- */
+
+.resultado {
+  max-width: 450px;
+  margin: 20px 0;
+}
+
+.resultado p {
+  font-family: sans-serif;
+  font-size: 1rem;
 }
