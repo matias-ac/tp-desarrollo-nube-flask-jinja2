@@ -7,6 +7,8 @@ from validaciones_form import es_edad_correcta, es_email_correcto, es_nombre_cor
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
 
+usuarios = []
+
 CARRERAS = {
     "analisis": "Análisis de Sistemas",
     "desarrollo": "Desarrollo de Software",
@@ -70,6 +72,14 @@ def formulario():
                 nombre, email, edad, carrera, comentarios
             )
 
+        usuarios.append({
+            "nombre": nombre,
+            "email": email,
+            "edad": edad,
+            "carrera": CARRERAS[carrera],
+            "comentarios": comentarios,
+        })
+
         return render_template(
             "resultado.html",
             nombre=nombre,
@@ -79,6 +89,11 @@ def formulario():
             comentarios=comentarios,
         )
     return render_template("formulario.html")
+
+
+@app.route("/usuarios")
+def listado():
+    return render_template("usuarios.html", usuarios=usuarios)
 
 
 if __name__ == "__main__":
